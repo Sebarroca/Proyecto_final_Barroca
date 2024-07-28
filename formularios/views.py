@@ -61,8 +61,7 @@ def buscarCurso(request):
         cursos = Curso.objects.filter(nombre__icontains=nombre)
         return render(request, "plantillas/inicio.html", {"cursos": cursos, "nombre": nombre})
     else:
-        respuesta = "No enviaste datos"
-        return HttpResponse(respuesta)
+        return render(request,"plantillas/inicio.html")
     
 def buscarEstudiante(request):
     apellido=request.GET.get('apellido')
@@ -86,5 +85,4 @@ def buscarProfesor(request):
         profesor = Profesor.objects.filter(especialidad__icontains=especialidad)
         return render(request, "plantillas/inicio.html", {"profesor": profesor, "especialidad": especialidad})
     else:
-        respuesta = "No enviaste datos"
-        return HttpResponse(respuesta)
+        return render(request,"plantillas/inicio.html")
