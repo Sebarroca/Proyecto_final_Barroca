@@ -1,0 +1,66 @@
+{% extends 'plantillas/base.html' %}
+{% load static %}
+
+{% block heading %}
+<div class="mooli-regular">Curso</div>
+{% endblock  %}
+
+{% block titulo %}
+Detalles del curso
+{% endblock  %}
+
+
+
+
+{% block adicional %}
+
+<style>
+    .regresar {
+        display: flex;
+        justify-content: left;
+        margin: 15px 0;    }
+    .regresar button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .regresar button a {
+        color: white;
+        text-decoration: none;    }  
+    .regresar button:hover { 
+        background-color: #497e44;    }
+
+    .texto {
+        font-family: Arial, sans-serif;
+        margin: 20px 0;    }
+    .texto p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #333;    }
+    .texto p i {
+        font-style: italic;
+        color: #a80707;    }
+
+    .datos {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;    }
+</style>
+
+
+<div class="texto">
+    <p class="datos">Nombre del Curso: <i> <b>{{curso.nombre}}</b></i></p>
+    <p class="datos">Comisión: <i><b>{{curso.comision}}</b></i></p>
+    <p class="datos">Autor: <i><b>{{curso.autor}}</b></i></p>
+    <p class="datos">Fecha de creación: <i><b>{{curso.fecha}}</b></i></p>
+
+</div>
+
+<p class="regresar">
+    <button><a href="{% url 'cursos' %}">Regresar</a></button>
+</p>
+
+{% endblock  %}

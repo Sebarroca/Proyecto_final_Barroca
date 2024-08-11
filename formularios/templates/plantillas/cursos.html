@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block heading %}
-<div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Cursos</div>
+<div class="mooli-regular">Cursos</div>
 {% endblock  %}
 
 {% block titulo %}
@@ -12,29 +12,190 @@ Cursos
 
 {% block adicional %}
 <style>
-    .form-container {
+    .agregar {
         display: flex;
         justify-content: center;
-        align-items: center;
-    }
-    .centered-form {
-        border: 2px solid black; 
-        padding: 20px; 
-        border-radius: 10px; 
+        margin: 20px 0;    }
+    .agregar button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .agregar button a {
+        color: white;
+        text-decoration: none;    }
+    .agregar button:hover {
+        background-color: #497e44;    }
+
+    .boton {        
+        list-style-type: none;
+        padding: 0;    }
+    .boton li {
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;    }
+    .boton p {
+        margin: 10px 0;    }
+    .boton button {
+        margin-right: 10px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;    }
+    .boton button a {
+        color: white;
+        text-decoration: none;    }
+    .boton button:hover {
+        background-color: #0056b3;    }
+    .boton button a:hover {
+        text-decoration: underline;    }
+
+    .curso {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;    }
+
+    .buscar {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;    }
+    .buscar button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .buscar button a {
+        color: white;
+        text-decoration: none;    }
+    .buscar button:hover {
+        background-color: #497e44;    }
+
+        .agregar button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .agregar button a {
+        color: white;
+        text-decoration: none;    }
+    .agregar button:hover {
+        background-color: #497e44;    }
+
+    .adicional{
+        display: flex;
+        justify-content: center;}
+
+    .volver {
+        display: inline-block;
+        background-color: #007bff; 
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px; 
+        border: none;
+        font-weight: bold;}
+    .volver:hover {
+        background-color: #0056b3;
+        color: white; }
+
+        .testo {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #fcfdbd;
+    border-radius: 5px;
+    background-color: #ddedff;    
+    display: flex;
+    justify-content: center;
+    margin: 10px 0; 
+    font-family: "Mooli", sans-serif;
+    font-weight: 400;
+    font-style: normal;   
     }
 </style>
-<body>
-    <div class="form-container">
-    <form class="centered-form" action="" method="POST">
-        <h4 style="color: rgb(5, 53, 107);">Formulario para cursos</h4>
-        {% csrf_token %}
-        <table>
-            {{miFormulario.as_table}} 
-        </table>
-        <input type = "submit" value="Enviar">
-    </form>
-    </div>   
-</body>
 
-{% endblock  %}
 
+
+<div style="background-color: rgb(237, 242, 255);">
+    <h5 class="testo">Conoce mas sobre nuestros cursos</h5>
+    <h6 class="testo">Accede a ellos mediante nuestra tecnologia de busqueda avanzada </h6>
+</div>
+
+
+<div class="agregar">
+    <button><a href="{% url 'CrearCurso' %}">Agregar Curso</a></button>
+</div>
+
+
+<!--  DROPWDOWN  -->
+<div>
+<div class="dropdown" >
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+        Buscar Curso
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+        
+        <div class="form-container">
+            <form class="centered-form" action="/buscarCurso/" method="GET">
+                <h4 class="adicional" style="color: white;">Buscar cursos</h4>
+                <a style="color: white;">Buscar nombre del curso:<input type="text" name="nombre" id="nombre"></a>
+                <input type="submit" value="Buscar"></a><br>
+
+                <a style="color: white;">Buscar número de comisión:<input type="number" name="comision" id="comision"> </a>
+                <input type="submit" value="Buscar" >
+            </form>
+        </div>
+    </ul>
+</div>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    {% if mensaje %}
+        <p> <h3 style="color: rgba(255, 0, 0, 0.685);">{{ mensaje }}</h3> </p>
+        <a href="{% url 'cursos' %}" class="volver">Volver a cursos</a>
+    {% endif %}
+</div>
+
+<ul class="boton">
+    {% for curso in cursos %}
+    
+        <li>Curso: <b style="color: darkblue;">{{curso.nombre}} </b></li>
+        <p>
+            <button><a href="{% url 'DetalleCurso' curso.pk %}">Ver</a></button>
+            <button><a href="{% url 'EditarCurso' curso.pk %}">Editar</a></button>
+            <button><a href="{% url 'BorrarCurso' curso.pk %}">Eliminar</a></button>
+        </p>
+        {% empty %}
+        <li>No hay cursos disponibles en este momento.</li>
+    {% endfor %}
+</ul>
+
+<section class="showcase">
+    <div class="container-fluid p-0">
+                <div class="row g-0">
+            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{% static 'estaticos/assets/img/coding.jpg' %}')"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>La mejor educación online a tu alcance</h2>
+                <p class="lead mb-0">Clases prácticas con mentorías personalizadas dictadas por quienes más saben, para dar el siguiente paso en tu carrera profesional.</p>
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-lg-6 text-white showcase-img" style="background-image: url('{% static 'estaticos/assets/img/coding2.jpg' %}')"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Elegí tu curso o carrera</h2>
+                <p class="lead mb-0">El contenido de nuestros cursos y carreras está avalado por las empresas de tecnología más innovadoras a nivel global.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

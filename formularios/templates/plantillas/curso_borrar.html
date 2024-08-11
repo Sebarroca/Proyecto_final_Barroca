@@ -1,0 +1,98 @@
+{% extends 'plantillas/base.html' %}
+{% load static %}
+
+{% block heading %}
+<div class="mooli-regular">Cursos</div>
+{% endblock  %}
+
+{% block titulo %}
+Eliminar curso
+{% endblock  %}
+
+
+
+{% block adicional %}
+
+<style>
+    .regresar {
+        display: flex;
+        justify-content: left;
+        margin: 15px 0;    }
+    .regresar button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .regresar button a {
+        color: white;
+        text-decoration: none;    }
+    .regresar button:hover {
+        background-color: #497e44;    }
+
+
+    .texto {
+        font-family: Arial, sans-serif;
+        margin: 20px 0;    }
+    .texto p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #333;    }
+    .texto p i {
+        font-style: italic;
+        color: #a80707;    }
+
+
+    .eliminar {
+        display: flex;
+        justify-content: left;
+        margin: 10px 0;    }
+    .eliminar button {
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;    }
+    .eliminar button a {
+        color: white;
+        text-decoration: none;    }
+    .eliminar input[type="submit"] {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #da3f3f;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        transition: background-color 0.3s ease;    }
+    .eliminar input[type="submit"]:hover {
+        background-color: #b60d0d;    }
+
+    .datos {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;    }
+
+</style>
+
+
+
+<form action=""method="POST">
+{% csrf_token %}
+
+<div class="texto">
+    <p class="datos">¿Deseas eliminar el curso: <i><b>{{curso.nombre}}</b></i> - comision: <i><b>{{curso.comision}}</b></i> ?</p>
+</div>
+{% if user.is_superuser %}
+<div class="eliminar">
+<input type="submit" value="Eliminar">
+</div>
+{% endif %}
+</form>
+
+<p class="regresar">
+    <button><a href="{% url 'cursos' %}">Regresar</a></button>
+</p>
+
+{% endblock  %}

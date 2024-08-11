@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block heading %}
-<div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Estudiantes</div>
+<div class="mooli-regular">Estudiantes</div>
 {% endblock  %}
 
 {% block titulo %}
@@ -12,28 +12,150 @@ Estudiantes
 
 {% block adicional %}
 <style>
-    .form-container {
+    .agregar {
         display: flex;
         justify-content: center;
-        align-items: center;
-    }
-    .centered-form {
-        border: 2px solid black; 
-        padding: 20px; 
-        border-radius: 10px; 
-    }
-</style>
-<body>
-    <div class="form-container">
-    <form class="centered-form" action="" method="POST">
-        <h4 style="color: rgb(5, 53, 107);">Formulario para estudiantes</h4>
-        {% csrf_token %}
-        <table>
-            {{miFormulario.as_table}} 
-        </table>
-        <input type = "submit" value="Enviar">
-    </form>
-    </div>   
-</body>
+        margin: 20px 0;    }
+    .agregar button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .agregar button a {
+        color: white;
+        text-decoration: none;    }
+    .agregar button:hover {
+        background-color: #497e44;    }
 
-{% endblock  %}
+    .boton {        
+        list-style-type: none;
+        padding: 0;    }
+    .boton li {
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;    }
+    .boton p {
+        margin: 10px 0;    }
+    .boton button {
+        margin-right: 10px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;    }
+    .boton button a {
+        color: white;
+        text-decoration: none;    }
+    .boton button:hover {
+        background-color: #0056b3;    }
+    .boton button a:hover {
+        text-decoration: underline;    }
+
+        .adicional{
+    display: flex;
+    justify-content: center;
+}
+    .volver {
+    display: inline-block;
+    background-color: #007bff; 
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px; 
+    border: none;
+    font-weight: bold;
+}
+    .volver:hover {
+    background-color: #0056b3;
+color: white; }
+
+.testo {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #fcfdbd;
+    border-radius: 5px;
+    background-color: #ddedff;    
+    display: flex;
+    justify-content: center;
+    margin: 10px 0; 
+    font-family: "Mooli", sans-serif;
+    font-weight: 400;
+    font-style: normal;   
+    }
+
+</style>
+
+
+<div style="background-color: rgb(237, 242, 255);">
+    <h5 class="testo">Se parte de nuestros <s>.clientes.</s> alumnos más destacados</h5>
+
+    <h6 class="testo">Sacrificá vida social para estar en nuestra portada de la pagina web </h6>
+</div>
+
+<div class="agregar">
+    <button><a href="{% url 'EstudiantesCrear' %}">Agregar estudiante</a></button>
+</div>
+
+<div>
+    <div class="dropdown" >
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+            Buscar estudiante
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <div class="form-container">
+                <form class="centered-form" action="/buscarEstudiante/" method="GET">
+                    <h4 class="adicional" style="color: white;">Buscar estudiante</h4>
+                    <a style="color: white;">Buscar por apellido:<input type="text" name="apellido" id="apellido"></a>
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+        </ul>
+    </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        {% if mensaje %}
+            <p> <h3 style="color: rgba(255, 0, 0, 0.685);">{{ mensaje }}</h3> </p>
+            <a href="{% url 'estudiantes' %}" class="volver">Volver a estudiantes</a>
+        {% endif %}
+    </div>
+
+
+<ul class="boton">
+    {% for e in estudiantes %}
+        <li>Estudiante: <b style="color: darkblue;">{{e.nombre}} {{e.apellido}}</b></li>
+        <p>
+            <button><a href="{% url 'EstudiantesDetalles' e.pk %}">Ver</a></button>
+            <button><a href="{% url 'EstudiantesEditar' e.pk %}">Editar</a></button>
+            <button><a href="{% url 'EstudiantesBorrar' e.pk %}">Eliminar</a></button>
+        </p>
+        {% empty %}
+        <li>No hay estudiantes cargados en este momento.</li>
+    {% endfor %}
+</ul>
+
+<section class="showcase">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{% static 'estaticos/assets/img/scott.jpg' %}')"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>Nos apasiona aprender</h2>
+                <p class="lead mb-0">Buscamos continuamente crecer y aprender cosas nuevas. La curiosidad está en nuestra naturaleza.</p>
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-lg-6 text-white showcase-img" style="background-image: url('{% static 'estaticos/assets/img/est2.jpg' %}')"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Somos emprendedores</h2>
+                <p class="lead mb-0">Actuamos como dueños, tratando constantemente de hacer más con menos. Nos ayudamos entre todos y resolvemos los problemas por nuestra cuenta. Cuando cometemos errores, los asumimos y seguimos adelante.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

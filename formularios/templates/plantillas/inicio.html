@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block heading %}
-<div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Inicio</div>
+<div class="mooli-regular"><b>INICIO</b></div>
 {% endblock  %}
 
 {% block titulo %}
@@ -12,10 +12,6 @@ Inicio
 
 
 {% block adicional %}
-<br>
-<h5 > - Para poder completar los formularios, dirijase a las pestañas correspondientes</h5><br>
-<h5 > - En el menú de inicio podrá buscar los cursos, estudiantes y/o profesores</h5>
-
 <style>
     .form-container {
         display: flex;
@@ -35,31 +31,49 @@ Inicio
     .form-container > .centered-form:last-child {
         margin-right: 3px;
     }
+
+    .testo {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #fcfdbd;
+    border-radius: 5px;
+    background-color: #ddedff;    
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; 
+    font-family: "Mooli", sans-serif;
+    font-weight: 400;
+    font-style: normal;   
+    }
+
+    .vinculos{
+    text-decoration: none;
+    color: rgb(27, 19, 146);
+    }
+
+    .about { 
+    transition: font-size 1s ease, color 1s ease; 
+    display: flex; 
+    justify-content: center; 
+    font-size: xx-large; 
+    color:#007BFF; 
+}
+.about:hover { 
+    font-size: 3em; 
+    color: #00bdc4; 
+}
+
+
 </style>
 
-<div class="form-container">
-    <form class="centered-form" action="/buscarCurso/" method="GET">
-        <h2>Buscar cursos</h2>
-        Buscar nombre del curso:<input type="text" name="nombre" id="nombre">
-        <input type="submit" value="Buscar"><br>
-        Buscar número de comisión:<input type="number" name="comision" id="comision">  
-        <input type="submit" value="Buscar">
-    </form>
-
-    <form class="centered-form" action="/buscarProfesor/" method="GET">
-        <h2>Buscar profesores</h2>
-        Buscar por apellido:<input type="text" name="apellido" id="apellido">
-        <input type="submit" value="Buscar"><br>
-        Buscar por especialidad:<input type="text" name="especialidad" id="especialidad">  
-        <input type="submit" value="Buscar">
-    </form>
-
-    <form class="centered-form" action="/buscarEstudiante/" method="GET">
-        <h2>Buscar estudiantes</h2>
-        Buscar por apellido:<input type="text" name="apellido" id="apellido">
-        <input type="submit" value="Buscar">
-    </form>
+<div style="background-color: rgb(237, 242, 255);">
+    <h4 class="testo">¿Pensás quedarte afuera de la ola del conocimiento?</h4>
+    <h5 class="testo">Al unirte, podrás ver los cursos disponibles que tenemos para brindar</h5>
+    <h5 class="testo">Podes ser simplemente un estudiante o aspirar a ser parte de nuestro staff de docentes </h5>
+    <h5 class="testo">No te preocupes por ser tu propio jefe, nosotros nos vamos a encargar de eso </h5>
 </div>
+
+
 
 <section class="features-icons bg-light text-center">
     <div class="container">
@@ -68,33 +82,34 @@ Inicio
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                     <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
                     <h3>Cursos</h3>
-                    <p class="lead mb-0">                    
-                        {% for curso in  cursos %}
-                        <li style="font-size:larger;">Curso: {{curso.nombre}} - Comisión  {{curso.comision}} </li>
-                        {% endfor %}</p>
+                    <h5> Conoce mas sobre nuestros <a  class="vinculos" href="{%url 'cursos'%}"><b>cursos</b></a></h5>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                     <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
                     <h3>Profesores</h3>
-                    <p class="lead mb-0">                   
-                        {% for n in  profesores %}
-                        <li style="font-size:larger;"> {{n.nombre}} {{n.apellido}} - {{n.especialidad}} - {{n.email}} </li>
-                        {% endfor %}</p>
+                    <h5>Se parte de nuestro staff de <a class="vinculos" href="{%url 'profesores'%}"><b>profesores</b></a></h5>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                     <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
                     <h3>Estudiantes</h3>
-                    <p class="lead mb-0">                    
-                        {% for n in  estudiantes %}
-                        <li style="font-size:larger;"> {{n.nombre}} {{n.apellido}} - {{n.curso}} - {{n.email}} </li>
-                        {% endfor %}</p>
+                    <h5> Se parte de nuestro equipo de alumnnos <a class="vinculos" href="{%url 'estudiantes'%}"><b>estudiantes</b></a></h5>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<section class="showcase">
+    <div class="text-white showcase-img" style="background-image: url('{% static 'estaticos/assets/img/hero.png' %}')"></div>
+</section>
+<br><br>
+<a class="navbar-brand" href="{%url 'about'%}"style="color:rgb(0, 140, 255) ; font-style: normal;"><b class="about"> About </b></a>
+
+<br><br>
+
 {% endblock  %}

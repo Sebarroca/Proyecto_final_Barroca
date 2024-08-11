@@ -1,0 +1,60 @@
+{% extends 'plantillas/base.html' %}
+{% load static %}
+
+{% block heading %}
+<div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Sesión finalizda</div>
+{% endblock  %}
+
+{% block titulo %}
+Sesión finalizda
+{% endblock  %}
+
+{% block adicional %}
+<style>
+.regresar {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;    }
+    .regresar button {
+        padding: 05px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .regresar button a {
+        color: white;
+        text-decoration: none;    }
+    .regresar button:hover {
+        background-color: #497e44;    }
+
+    .inicio {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;    }
+    .inicio button {
+        padding: 05px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #2756ee;
+        color: white;
+        cursor: pointer;    }
+    .inicio button a {
+        color: white;
+        text-decoration: none;    }
+    .inicio button:hover {
+        background-color: #261972;    }
+        
+
+</style>
+
+
+<p class="inicio">
+    <button><a href="{% url 'Login' %}">Iniciar Sesión</a></button>
+</p>
+
+
+<p class="regresar">
+    <button><a href="{% url 'inicio' %}">Regresar al inicio</a></button>
+</p>
+{% endblock %}

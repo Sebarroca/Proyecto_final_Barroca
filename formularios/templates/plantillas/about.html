@@ -1,0 +1,88 @@
+{% extends 'plantillas/base.html' %}
+{% load static %}
+
+{% block heading %}
+<div class="mooli-regular">About me</div>
+{% endblock  %}
+
+{% block titulo %}
+Cursos
+{% endblock  %}
+
+
+{% block adicional %}
+<br>
+<section class="page-section" id="services">
+    <div class="container px-4 px-lg-5">
+        <h4 class="text-center mt-0" ><b class="mooli-regular"> Breve descripción mia y del proyecto</b></h4>
+        <hr class="divider" />
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div><i class="bi-gem fs-1 text-primary"></i></div>
+                    <h4>Practicar para aprender</h4>
+                    <p>Este proyecto me ayudó a entender y a desenvolverme de otra forma en la programación</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div><i class="bi-laptop fs-1 text-primary"></i></div>
+                    <h4> Trabajo individual </h4>
+                    <p> Para ser los primeros pasos me pareció mejor trabajar solo y conocer un poco el mundo desde mi punto de vista y así el día mañana sentirme capacitado para trabajar en equipos </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
+                    <h4 >El inicio de un hobbie</h4>
+                    <p>Me di cuenta que me gusta programar.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
+                    <h4>Le meti todo lo que pude</h4>
+                    <p>Es una simple web sin ningún proposito mas que sea funcional, pero me entretuve con el style.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="projects-section bg-light" id="projects">
+<div class="container px-4 px-lg-5">
+<div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="{% static 'estaticos/assets/img/about1.jpg' %}"  alt="..." /></div>
+    <div class="col-xl-4 col-lg-5">
+        <div class="featured-text text-center text-lg-left">
+            <h4>Desde los 90's</h4>
+            <p class="text-black-50 mb-0">En mi epoca, estudiar programación era estudiar "computación"</p>
+        </div>
+    </div>
+</div>
+<div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+    <div class="col-xl-4 col-lg-5">
+        <div class="featured-text text-center text-lg-left">
+        <h4>Prueba y error</h4>
+        <p class="text-black-50 mb-0">Tocar todos los botones provocaba esto</p>
+        </div>
+    </div>
+    <div class="col-xl-8 col-lg-7">
+        <img class="img-fluid mb-3 mb-lg-0" src="{% static 'estaticos/assets/img/about2.png' %}" alt="..." />
+    </div>
+</div>
+
+<div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="{% static 'estaticos/assets/img/about3.jpg' %}"  alt="..." /></div>
+    <div class="col-xl-4 col-lg-5">
+        <div class="featured-text text-center text-lg-left">
+            <h4>Mundo en 1,44 MB</h4>
+            <p class="text-black-50 mb-0">El mundo entero entraba en 1,44 MB</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

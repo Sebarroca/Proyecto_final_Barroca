@@ -17,22 +17,59 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'estaticos/css/styles.css' %}" rel="stylesheet" />
         <style>
-            .inicio-text {transition: font-size 0.3s ease;}
-            .inicio-text:hover { font-size: 1.3em;}
+            .barra {transition: font-size 0.3s ease;}
+            .barra:hover { font-size: 1.3em;}
         </style>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Mooli&display=swap');
+    </style>
+    
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a  class="navbar-brand" href="{%url 'inicio'%}" style="color: darkblue; font-style: normal; "> <b class="inicio-text"> Inicio </b> </a>
-                <a class="navbar-brand" href="{%url 'curso'%}" style="color: darkblue; font-style: normal;"><b class="inicio-text"> Cursos </b></a>
-                <a class="navbar-brand" href="{%url 'estudiantes'%}"style="color: darkblue; font-style: normal;"><b class="inicio-text"> Estudiantes </b></a>
-                <a class="navbar-brand" href="{%url 'profesores'%}"style="color: darkblue; font-style: normal;"><b class="inicio-text"> Profesores </b></a>
-                <a class="btn btn-primary" href="{% url 'admin:index' %}"><b class="inicio-text"> Admin </b></a>
+            <div>
+                <a  class="navbar-brand" href="{%url 'inicio'%}" style="color: darkblue; font-style: normal; "> <b class="barra"> Inicio </b> </a>
+                <a class="navbar-brand" href="{%url 'cursos'%}" style="color: darkblue; font-style: normal;"><b class="barra"> Cursos </b></a>
+                <a class="navbar-brand" href="{%url 'estudiantes'%}"style="color: darkblue; font-style: normal;"><b class="barra"> Estudiantes </b></a>
+                <a class="navbar-brand" href="{%url 'profesores'%}"style="color: darkblue; font-style: normal;"><b class="barra"> Profesores </b></a>
+                <a class="navbar-brand" href="{%url 'about'%}"style="color:rgb(0, 140, 255) ; font-style: normal;"><b class="barra"> About </b></a>
             </div>
+
+<div class="d-flex align-items-center">
+
+            <!-- Dropdown de Usuario-->
+            {% if request.user.is_authenticated %}
+        
+            <div class="dropdown">
+                <img src="{{request.user.avatar.imagen.url}}" alt=""height="40px">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ request.user.username }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar perfil</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar sesión</a></li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Login / Registrarse
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="{% url 'Login' %}">Inciar Sesión</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Register' %}">Crear cuenta</a></li>
+                </ul>
+            </div>
+        {% endif %}
+
+</div>
         </nav>
-        <!-- Masthead-->
+
+
+
+
+<!-- Masthead-->
         <header class="masthead">
             <div class="container position-relative">
                 <div class="row justify-content-center">
@@ -40,41 +77,6 @@
                         <div class="text-center text-white">
                             <!-- Page heading-->
                             <h1 class="mb-5">{% block heading %} {% endblock  %} </h1>
-                            <!-- Signup form-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- * * SB Forms Contact Form * *-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- This form is pre-integrated with SB Forms.-->
-                            <!-- To make this form functional, sign up at-->
-                            <!-- https://startbootstrap.com/solution/contact-forms-->
-                            <!-- to get an API token!-->
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Email address input-->
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                                    </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
-                                </div>
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        <p>To activate this form, sign up at</p>
-                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -82,7 +84,7 @@
         </header>
 
 {% block adicional %} {% endblock  %}
- 
+
         <!-- Footer-->
         <footer class="footer bg-light">
             <div class="container">
@@ -91,14 +93,14 @@
                         <ul class="list-inline mb-2">
                             <li class="list-inline-item"><a href=" {% url 'inicio'%} ">Inicio</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="{%url 'curso'%}">Cursos</a></li>
+                            <li class="list-inline-item"><a href="{%url 'cursos'%}">Cursos</a></li>
                             <li class="list-inline-item">⋅</li>
                             <li class="list-inline-item"><a href="{%url 'estudiantes'%}">Estudiantes</a></li>
                             <li class="list-inline-item">⋅</li>
                             <li class="list-inline-item"><a href="{%url 'profesores'%}">Profesores</a></li>
                             <li class="list-inline-item">⋅</li>
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Tercera pre-entrega Sebastián Barroca</p>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Proyecto final - Sebastián Barroca</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">

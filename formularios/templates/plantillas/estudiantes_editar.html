@@ -1,0 +1,96 @@
+{% extends 'plantillas/base.html' %}
+{% load static %}
+
+{% block heading %}
+<div class="mooli-regular">Estudiantes</div>
+{% endblock  %}
+
+{% block titulo %}
+Editar estudiante
+{% endblock  %}
+
+
+{% block adicional %}
+
+<style>
+    .cuadro {
+        display: flex;
+        justify-content: center;
+        align-items: center;    }
+    .marco {
+        border: 2px solid black; 
+        padding: 15px; 
+        border-radius: 15px;     }
+
+    .editar {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;    }
+    .editar button {
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;    }
+    .editar button a {
+        color: white;
+        text-decoration: none;    }
+    .editar input[type="submit"] {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;    }
+    .editar input[type="submit"]:hover {
+        background-color: #0056b3;    }
+
+    .regresar {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;    }
+    .regresar button {
+        padding: 05px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .regresar button a {
+        color: white;
+        text-decoration: none;    }
+    .regresar button:hover {
+        background-color: #497e44;    }
+
+    .table {
+    color: #0056b3;    }
+
+    .titulo {
+        display: flex;
+        justify-content: center;
+    color: #0056b3;}
+
+</style>
+<br>
+<div class="cuadro">
+<form class="marco" action="" method="POST">
+    <h4 class="titulo"> Formulario </h4>
+{% csrf_token %}
+
+<table class="table">
+{{form.as_table}}
+</table>
+{% if user.is_superuser %}
+<div class="editar">
+    <input type="submit" value="Editar">
+</div>
+{% endif %}
+</form>
+</div>
+
+<p class="regresar">
+    <button><a href="{% url 'estudiantes' %}">Regresar</a></button>
+</p>
+
+{% endblock  %}

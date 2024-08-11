@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block heading %}
-<div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Profesores</div>
+<div class="mooli-regular">Profesores</div>
 {% endblock  %}
 
 {% block titulo %}
@@ -11,31 +11,166 @@ Profesores
 
 
 {% block adicional %}
-
 <style>
-    .form-container {
+    .agregar {
         display: flex;
         justify-content: center;
-        align-items: center;
-    }
-    .centered-form {
-        border: 2px solid black; 
-        padding: 20px; 
-        border-radius: 10px; 
+        margin: 20px 0;    }
+    .agregar button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .agregar button a {
+        color: white;
+        text-decoration: none;    }
+    .agregar button:hover {
+        background-color: #497e44;    }
+
+    .boton {        
+        list-style-type: none;
+        padding: 0;    }
+    .boton li {
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;    }
+    .boton p {
+        margin: 10px 0;    }
+    .boton button {
+        margin-right: 10px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;    }
+    .boton button a {
+        color: white;
+        text-decoration: none;    }
+    .boton button:hover {
+        background-color: #0056b3;    }
+    .boton button a:hover {
+        text-decoration: underline;    }
+
+        .adicional{
+    display: flex;
+    justify-content: center;}
+    .volver {
+    display: inline-block;
+    background-color: #007bff; 
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px; 
+    border: none;
+    font-weight: bold;}
+
+    .volver:hover {
+    background-color: #0056b3;
+color: white; }
+
+.testo {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #fcfdbd;
+    border-radius: 5px;
+    background-color: #ddedff;    
+    display: flex;
+    justify-content: center;
+    margin: 10px 0; 
+    font-family: "Mooli", sans-serif;
+    font-weight: 400;
+    font-style: normal;   
     }
 </style>
-<body>
-    <div class="form-container">
-    <form class="centered-form" action="" method="POST">
-        <h4 style="color: rgb(5, 53, 107);">Formulario para profesores</h4>
-        {% csrf_token %}
-        <table>
-            {{miFormulario.as_table}} 
-        </table>
-        <input type = "submit" value="Enviar">
-    </form>
-    </div>   
-</body>
 
-{% endblock  %}
+<div style="background-color: rgb(237, 242, 255);">
+    <h5 class="testo">Conoce mas sobre nuestros docentes a cargo</h5>
+    <h6 class="testo">"Muere siendo un estudiante o vive lo suficiente para ser un profesor" </h6>
+</div>
 
+<div class="agregar">
+    <button><a href="{% url 'ProfesoresCrear' %}">Agregar profesor/a</a></button>
+</div>
+
+
+<div>
+    <div class="dropdown" >
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+            Buscar profesor/a
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <div class="form-container">
+                <form class="centered-form" action="/buscarProfesor/" method="GET">
+                    <h4 class="adicional" style="color: white;">Buscar profesor/a</h4>
+                    <a style="color: white;"> Buscar por apellido:<input type="text" name="apellido" id="apellido"></a>
+                    <input type="submit" value="Buscar"><br>
+                    <a style="color: white;">Buscar por especialidad:<input type="text" name="especialidad" id="especialidad"></a> 
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+        </ul>
+    </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        {% if mensaje %}
+            <p> <h3 style="color: rgba(255, 0, 0, 0.685);">{{ mensaje }}</h3> </p>
+            <a href="{% url 'profesores' %}" class="volver">Volver a profesores</a>
+        {% endif %}
+    </div>
+
+
+<ul class="boton">
+    {% for p in profesores %}
+        <li>Profesor/a: <b style="color: darkblue;">{{p.nombre}} {{p.apellido}}</b></li>
+        <p>
+            <button><a href="{% url 'ProfesoresDetalles' p.pk %}">Ver</a></button>
+            <button><a href="{% url 'ProfesoresEditar' p.pk %}">Editar</a></button>
+            <button><a href="{% url 'ProfesoresBorrar' p.pk %}">Eliminar</a></button>
+        </p>
+        {% empty %}
+        <li>No hay profesores disponibles en este momento.</li>
+    {% endfor %}
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="showcase">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{% static 'estaticos/assets/img/prof.jpg' %}')"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>Somos líderes</h2>
+                <p class="lead mb-0">Llevamos a cabo procesos de comienzo a fin logrando excelentes resultados, cuidando a nuestro equipo y recursos.</p>
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-lg-6 text-white showcase-img" style="background-image: url('{% static 'estaticos/assets/img/prof2.jpg' %}')"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Nos centramos en nuestros estudiantes</h2>
+                <p class="lead mb-0">Trabajamos todos los días para resolver sus problemas, agregarles valor y lograr que aprender se convierta en una experiencia increíble.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

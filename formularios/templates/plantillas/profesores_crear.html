@@ -1,0 +1,99 @@
+{% extends 'plantillas/base.html' %}
+{% load static %}
+
+{% block heading %}
+<div class="mooli-regular">Profesores</div>
+{% endblock  %}
+
+{% block titulo %}
+Agregar profesor
+{% endblock  %}
+
+
+
+{% block adicional %}
+
+<style>
+    .cuadro {
+        display: flex;
+        justify-content: center;
+        align-items: center;    }
+    .marco {
+        border: 2px solid black; 
+        padding: 15px; 
+        border-radius: 15px;     }
+
+    .crear {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;    }
+    .crear button {
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;    }
+    .crear button a {
+        color: white;
+        text-decoration: none;    }
+    .crear input[type="submit"] {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;    }
+    .crear input[type="submit"]:hover {
+        background-color: #0056b3;    }
+
+    .regresar {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;    }
+    .regresar button {
+        padding: 05px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;    }
+    .regresar button a {
+        color: white;
+        text-decoration: none;    }
+    .regresar button:hover {
+        background-color: #497e44;    }
+
+    .table {
+    color: #0056b3;    }
+
+    .titulo {
+        display: flex;
+        justify-content: center;
+    color: #0056b3;}
+
+</style>
+
+<br>
+<div class="cuadro">
+    <form class="marco" action="" method="POST">
+        <h4 class="titulo"> Agregar profesor/a </h4>
+    {% csrf_token %}
+    <table class="table">
+        {{form.as_table}}
+    </table>
+
+    <div class="crear"> 
+        <input type="submit" value="Crear">
+    </div>
+    
+
+    </form>
+    </div>
+
+    <p class="regresar">
+        <button><a href="{% url 'profesores' %}">Regresar</a></button>
+    </p>
+
+
+{% endblock  %}
